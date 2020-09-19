@@ -7,13 +7,13 @@ docker版本： 19.03.12
 如果版本不对，加载容器的时候会出错   
 docker仓库：https://hub.docker.com/r/cwaffles/openpose   
 docker常用指令：https://www.runoob.com/docker/docker-tutorial.html  
-*step1:安装docker*  
+**step1:安装docker**  
 使用官方安装脚本自动安装:   
 curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun   
 手动安装   
 参考链接：https://www.runoob.com/docker/ubuntu-docker-install.html   
   
-*step2:安装NVIDIA CONTAINER RUNTIME*  
+**step2:安装NVIDIA CONTAINER RUNTIME** 
 新建一个脚本文件 vim nvidia.sh 填入如下内容:   
 sudo curl -s -L https://nvidia.github.io/nvidia-container-runtime/gpgkey | \
   sudo apt-key add -
@@ -27,7 +27,7 @@ sudo apt-get update
 安装 nvidia-container-runtime:
 sudo apt-get install nvidia-container-runtime
 
-*step3:创建用户组，方便授权*
+**step3:创建用户组，方便授权**
 
 如果没有sudo权限，可以创建dockers权限组
 sudo groupadd docker
@@ -37,7 +37,7 @@ newgrp - docker    //将当前用户以docker用户组的身份再次登录系�
 
 通过cat /etc/group可以查看用户组信息
 
-*step4:下载镜像，对应cuda10.0,cudnn7.0*
+**step4:下载镜像，对应cuda10.0,cudnn7.0**
 
 docker pull cwaffles/openpose
 通过镜像创建容器
@@ -48,7 +48,7 @@ sudo docker run --gpus all --name openpose -it cwaffles/openpose:latest /bin/bas
 docker exec -it openpose /bin/bash
 注：还可以使用以下命令一次删除所有停止的容器。docker rm $(docker ps -a -q)
 
-*step5:测试openpose的demo*
+**step5:测试openpose的demo**
 
 ＃only body
 ./build/examples/openpose/openpose.bin --video examples/media/video.avi --write_json output/ --display 0 --render_pose 0
