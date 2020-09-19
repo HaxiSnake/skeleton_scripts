@@ -3,19 +3,19 @@
 ## 预先准备
 
 * 安装openpose的docker镜像
-docker版本： 19.03.12
-如果版本不对，加载容器的时候会出错
-docker仓库：https://hub.docker.com/r/cwaffles/openpose
-docker常用指令：https://www.runoob.com/docker/docker-tutorial.html
-step1:安装docker
+docker版本： 19.03.12   
+如果版本不对，加载容器的时候会出错   
+docker仓库：https://hub.docker.com/r/cwaffles/openpose   
+docker常用指令：https://www.runoob.com/docker/docker-tutorial.html  
+step1:安装docker   
 
-使用官方安装脚本自动安装:
-curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
-手动安装
-参考链接：https://www.runoob.com/docker/ubuntu-docker-install.html
-
-step2:安装NVIDIA CONTAINER RUNTIME
-新建一个脚本文件 vim nvidia.sh 填入如下内容:
+使用官方安装脚本自动安装:   
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun   
+手动安装   
+参考链接：https://www.runoob.com/docker/ubuntu-docker-install.html   
+  
+step2:安装NVIDIA CONTAINER RUNTIME   
+新建一个脚本文件 vim nvidia.sh 填入如下内容:   
 
 sudo curl -s -L https://nvidia.github.io/nvidia-container-runtime/gpgkey | \
   sudo apt-key add -
