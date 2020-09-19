@@ -2,13 +2,12 @@
 
 ## 预先准备
 
-* 安装openpose的docker镜像   
+* **安装openpose的docker镜像**   
 docker版本： 19.03.12   
 如果版本不对，加载容器的时候会出错   
 docker仓库：https://hub.docker.com/r/cwaffles/openpose   
 docker常用指令：https://www.runoob.com/docker/docker-tutorial.html  
 step1:安装docker   
-
 使用官方安装脚本自动安装:   
 curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun   
 手动安装   
