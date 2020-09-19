@@ -54,7 +54,7 @@ docker exec -it openpose /bin/bash
 ./build/examples/openpose/openpose.bin --video examples/media/video.avi --write_json output/ --display 0 --render_pose 0   
 #Body + face + hands   
 ./build/examples/openpose/openpose.bin --video examples/media/video.avi --write_json output/ --display 0 --render_pose 0 --face --hand
-### 将本仓库和视频文件以数据卷方式挂载到openpose docker容器中
+###  将本仓库和视频文件以数据卷方式挂载到openpose docker容器中
 接下来可以看一下docker容器的共享文件夹来拷贝数据集
 
 docker run -it -v  /宿主机绝对路径目录:  /容器内目录  镜像名
