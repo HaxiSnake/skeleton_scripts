@@ -2,11 +2,7 @@
 
 ## 预先准备
 
-* 安装openpose的docker镜像
-
-
-
-1
+* 安装openpose的docker镜像   
 docker版本： 19.03.12   
 如果版本不对，加载容器的时候会出错   
 docker仓库：https://hub.docker.com/r/cwaffles/openpose   
