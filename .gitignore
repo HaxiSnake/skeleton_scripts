@@ -1,0 +1,6 @@
+*.log
+*.out
+*.csv
+tmp*
+*.swp
+__pycache__
