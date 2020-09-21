@@ -34,13 +34,16 @@ def gendata(
         label_out_path,
         num_person_in=5,  #observe the first 5 persons 
         num_person_out=1,  #then choose 2 persons with the highest score 
-        max_frame=1500):
+        max_frame=2500,
+        joins_count=25):
 
     feeder = Feeder_skating(
         data_path=data_path,
         label_path=label_path,
         num_person_in=num_person_in,
         num_person_out=num_person_out,
+        joins_count=joins_count,
+        debug=False,
         window_size=max_frame)
 
     sample_name = feeder.sample_name
@@ -50,7 +53,7 @@ def gendata(
         data_out_path,
         dtype='float32',
         mode='w+',
-        shape=(len(sample_name), 3, max_frame, 18, num_person_out))
+        shape=(len(sample_name), 3, max_frame, joins_count, num_person_out))
 
     for i, s in enumerate(sample_name):
         data, label = feeder[i]
@@ -68,15 +71,15 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='Skating-skeleton Data Converter.')
     parser.add_argument(
-        '--data_path', default='output/Skating/')
+        '--data_path', default='/skating2.0/skating63_openpose_result')
     parser.add_argument(
-        '--out_folder', default='output/Skating/')
+        '--out_folder', default='/skating2.0/skating63_openpose_result/skeleton_file')
     arg = parser.parse_args()
 
-    part = ['train', 'val']
+    part = ['label_train_skating63', 'label_val_skating63']
     for p in part:
         data_path = '{}/{}_data'.format(arg.data_path, p)  
-        label_path = '{}/{}_label.json'.format(arg.data_path, p)
+        label_path = '{}/{}.csv'.format(arg.data_path, p)
         data_out_path = '{}/{}_data.npy'.format(arg.out_folder, p)
         label_out_path = '{}/{}_label.pkl'.format(arg.out_folder, p)
 

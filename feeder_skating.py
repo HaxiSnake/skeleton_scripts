@@ -10,9 +10,6 @@ import torch
 import torch.nn as nn
 from torchvision import datasets, transforms
 
-# operation
-from . import tools
-
 
 class Feeder_skating(torch.utils.data.Dataset):
     """ Feeder for skeleton-based action recognition in kinetics-skeleton dataset
@@ -35,6 +32,7 @@ class Feeder_skating(torch.utils.data.Dataset):
                  window_size=-1,
                  num_person_in=5,
                  num_person_out=2,
+                 joins_count=25,
                  debug=False):
         self.debug = debug
         self.data_path = data_path
@@ -42,35 +40,31 @@ class Feeder_skating(torch.utils.data.Dataset):
         self.window_size = window_size
         self.num_person_in = num_person_in
         self.num_person_out = num_person_out
+        self.joins_count = joins_count
 
         self.load_data()
 
     def load_data(self):
         # load file list
-        self.sample_name = os.listdir(self.data_path)
-
-        if self.debug:
-            self.sample_name = self.sample_name[0:2]
-
+        self.sample_name = []
+        self.label = []
         # load label
         label_path = self.label_path
-        self.sample_label_map = {}
         with open(label_path) as f:
             for line in f.readlines():
                 info = line.strip()
                 _, video_name, _, label = info.split(",")
-                self.sample_label_map[video_name] = int(label)
+                self.sample_name.append(video_name)
+                self.label.append(int(label))
 
-        sample_id = [name.split('.')[0] for name in self.sample_name]
-
-        self.label = np.array(
-            [self.sample_label_map[name] for name in sample_id])
+        if self.debug:
+            self.sample_name = self.sample_name[0:2]
 
         # output data shape (N, C, T, V, M)
         self.N = len(self.sample_name)  #sample
         self.C = 3  #channel
-        self.T = 1500  #frame
-        self.V = 18  #joint
+        self.T = self.window_size  #frame
+        self.V = self.joins_count  #joint
         self.M = self.num_person_out  #person
 
     def __len__(self):
@@ -83,7 +77,7 @@ class Feeder_skating(torch.utils.data.Dataset):
 
         # output shape (C, T, V, M)
         # get data
-        sample_name = self.sample_name[index]
+        sample_name = self.sample_name[index] + ".json"
         sample_path = os.path.join(self.data_path, sample_name)
         with open(sample_path, 'r') as f:
             video_info = json.load(f)

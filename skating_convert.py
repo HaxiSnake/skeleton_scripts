@@ -64,7 +64,7 @@ if __name__ == '__main__':
     LOGGER.info(os.getcwd())
     part = ['label_train_skating63', 'label_val_skating63']
     restart_list = {
-        'label_train_skating63': 40,
+        'label_train_skating63': 3566,
         'label_val_skating63': 0
     }
     debug = False
